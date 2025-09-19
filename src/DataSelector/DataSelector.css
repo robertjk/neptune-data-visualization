@@ -1,0 +1,32 @@
+.DataSelector {
+  display: grid;
+  /* prettier-ignore */
+  grid-template:
+    "select-button file-name"    auto
+    "progress-bar  progress-bar" 0.6em /
+     auto          1fr;
+  gap: 0.4em;
+  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.DataSelector-selectButton {
+  grid-area: select-button;
+}
+
+.DataSelector-fileName {
+  grid-area: file-name;
+  place-items: center;
+  place-content: center;
+  border: 1px solid #ccc;
+  padding: 0 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.DataSelector-progressBar {
+  grid-area: progress-bar;
+  background-color: var(--color-blue-4) !important;
+}
