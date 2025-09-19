@@ -26,7 +26,7 @@ function DataSelector({ onDataLoaded }: DataSelectorProps) {
   return (
     <CSVReader onUploadAccepted={handleUploadAccepted} config={CONFIG}>
       {/* @ts-expect-error: react-papaparse doesn't expose proper typings */}
-      {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps }) => (
+      {({ getRootProps, acceptedFile, ProgressBar }) => (
         <div className="DataSelector">
           <button
             type="button"
