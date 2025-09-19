@@ -68,4 +68,4 @@ function Chart() {
   );
 }
 
-export { Chart as default };
+export { Chart };
