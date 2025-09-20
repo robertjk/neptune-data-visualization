@@ -1,11 +1,11 @@
 import { useState } from "react";
 
+import { AnimationControl } from "./AnimationControl";
 import { Chart } from "./Chart";
-import { OptionsControls, useOptionsReducer } from "./OptionsControls";
 import { DataSelector, type ChartData } from "./DataSelector";
+import { OptionsControls, useOptionsReducer } from "./OptionsControls";
 
 import "./App.css";
-import { AnimationControl } from "./AnimationControl";
 
 function App() {
   const [data, setData] = useState<ChartData | undefined>(undefined);
