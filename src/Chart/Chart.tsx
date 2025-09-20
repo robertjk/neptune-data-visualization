@@ -1,47 +1,40 @@
-import { useReducer } from "react";
 import UplotReact from "uplot-react";
 
 import "uplot/dist/uPlot.min.css";
 
-import {
-  ChartControls,
-  type ChartControlsValues,
-  type ChartControlValuesAction,
-} from "./ChartControls/ChartControls";
-import { CONTROLS_VALUES_INITIAL, OPTIONS } from "./Chart.config";
+import type { ChartControlsValues } from "../ChartControls";
 
+import { OPTIONS } from "./Chart.config";
 import "./Chart.css";
 
-function controlsValuesReducer(
-  state: ChartControlsValues,
-  action: ChartControlValuesAction
-): ChartControlsValues {
-  return { ...state, [action.type]: action.value };
+function extractData(
+  [dataX, dataY]: ChartData,
+  windowSize: number,
+  leftIndex: number
+): ChartData {
+  return [
+    dataX.slice(leftIndex, leftIndex + windowSize),
+    dataY.slice(leftIndex, leftIndex + windowSize),
+  ];
 }
 
 type ChartData = [number[], number[]];
 
 interface ChartProps {
-  data?: ChartData;
+  data: ChartData;
+  controlsValues: ChartControlsValues;
 }
 
-function Chart({ data }: ChartProps) {
-  const [controlsValues, dispatchControlsValues] = useReducer(
-    controlsValuesReducer,
-    CONTROLS_VALUES_INITIAL
+function Chart({ data, controlsValues }: ChartProps) {
+  const extractedData = extractData(
+    data,
+    controlsValues.windowSize,
+    controlsValues.leftIndex
   );
 
   return (
     <>
-      <ChartControls
-        values={controlsValues}
-        dispatchValues={dispatchControlsValues}
-      />
-      {data ? (
-        <UplotReact data={data} options={OPTIONS} />
-      ) : (
-        <p className="Chart-noData">You need to load data first</p>
-      )}
+      <UplotReact data={extractedData} options={OPTIONS} />
     </>
   );
 }

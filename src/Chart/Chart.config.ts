@@ -7,8 +7,8 @@ const OPTIONS = {
     },
     {
       label: "Y",
-      stroke: "blue",
-      width: 3,
+      stroke: "#4bcff0",
+      width: 1,
     },
   ],
   scales: {
@@ -22,7 +22,7 @@ const OPTIONS = {
   axes: [
     {
       show: true,
-      label: "X Axis",
+      label: "X",
       stroke: "white",
       grid: {
         show: true,
@@ -32,7 +32,7 @@ const OPTIONS = {
     },
     {
       show: true,
-      label: "Y Axis",
+      label: "Y",
       stroke: "white",
       grid: {
         show: true,
@@ -43,11 +43,4 @@ const OPTIONS = {
   ],
 };
 
-const CONTROLS_VALUES_INITIAL = {
-  windowSize: 100,
-  leftIndex: 0,
-  refreshTime: 500,
-  refreshSize: 10,
-};
-
-export { OPTIONS, CONTROLS_VALUES_INITIAL };
+export { OPTIONS };
