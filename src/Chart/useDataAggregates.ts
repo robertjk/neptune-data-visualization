@@ -66,13 +66,8 @@ function formatDataAggregates(
   return aggregatesFormatted;
 }
 
-function useDataAggregates(
-  data: ChartData | undefined
-): DataAggregatesFormatted | undefined {
+function useDataAggregates(data: ChartData): DataAggregatesFormatted {
   return useMemo(() => {
-    if (!data) {
-      return undefined;
-    }
     const dataAggregates = getDataAggregates(data);
     return formatDataAggregates(dataAggregates);
   }, [data]);

@@ -5,6 +5,7 @@ import { OptionsControls, useOptionsReducer } from "./OptionsControls";
 import { DataSelector, type ChartData } from "./DataSelector";
 
 import "./App.css";
+import { AnimationControl } from "./AnimationControl";
 
 function App() {
   const [data, setData] = useState<ChartData | undefined>(undefined);
@@ -22,11 +23,16 @@ function App() {
       <main className="App-main">
         <DataSelector onDataLoaded={handleDataLoaded} />
         <OptionsControls options={options} dispatchOptions={dispatchOptions} />
-        <Chart
-          data={data}
+        <AnimationControl
           options={options}
           dispatchOptions={dispatchOptions}
+          isDataLoaded={Boolean(data)}
         />
+        {data ? (
+          <Chart data={data} options={options} />
+        ) : (
+          <p className="App-noData">You need to load data first</p>
+        )}
       </main>
     </>
   );

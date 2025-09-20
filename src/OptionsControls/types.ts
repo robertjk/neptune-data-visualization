@@ -12,4 +12,8 @@ interface ChartOptionsAction {
 
 type ChartOptionsDispatch = (action: ChartOptionsAction) => void;
 
-export { type ChartOptions, type ChartOptionsDispatch };
+export {
+  type ChartOptions,
+  type ChartOptionsAction,
+  type ChartOptionsDispatch,
+};

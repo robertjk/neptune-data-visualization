@@ -4,14 +4,10 @@ import type { ChartData } from "../DataSelector";
 import type { ChartOptions } from "../OptionsControls";
 
 function extractDisplayedData(
-  data: ChartData | undefined,
+  data: ChartData,
   dataWindowSize: ChartOptions["dataWindowSize"],
   dataStartIndex: ChartOptions["dataStartIndex"]
-): ChartData | undefined {
-  if (!data) {
-    return undefined;
-  }
-
+): ChartData {
   const [dataX, dataY] = data;
   return [
     dataX.slice(dataStartIndex, dataStartIndex + dataWindowSize),
@@ -19,10 +15,7 @@ function extractDisplayedData(
   ];
 }
 
-function useDisplayedData(
-  data: ChartData | undefined,
-  options: ChartOptions
-): ChartData | undefined {
+function useDisplayedData(data: ChartData, options: ChartOptions): ChartData {
   return useMemo(
     () =>
       extractDisplayedData(
