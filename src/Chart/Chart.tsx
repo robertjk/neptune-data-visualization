@@ -1,55 +1,23 @@
+import { useReducer } from "react";
 import UplotReact from "uplot-react";
 
 import "uplot/dist/uPlot.min.css";
 
-import { ChartControls } from "./ChartControls";
+import {
+  ChartControls,
+  type ChartControlsValues,
+  type ChartControlValuesAction,
+} from "./ChartControls";
+import { CONTROLS_VALUES_INITIAL, OPTIONS } from "./Chart.config";
 
 import "./Chart.css";
 
-const OPTIONS = {
-  width: 800,
-  height: 600,
-  series: [
-    {
-      label: "X",
-    },
-    {
-      label: "Y",
-      stroke: "blue",
-      width: 3,
-    },
-  ],
-  scales: {
-    x: {
-      time: false,
-    },
-    y: {
-      auto: true,
-    },
-  },
-  axes: [
-    {
-      show: true,
-      label: "X Axis",
-      stroke: "white",
-      grid: {
-        show: true,
-        stroke: "rgba(255, 255, 255, 0.87)",
-        width: 1,
-      },
-    },
-    {
-      show: true,
-      label: "Y Axis",
-      stroke: "white",
-      grid: {
-        show: true,
-        stroke: "rgba(255, 255, 255, 0.87)",
-        width: 1,
-      },
-    },
-  ],
-};
+function controlsValuesReducer(
+  state: ChartControlsValues,
+  action: ChartControlValuesAction
+): ChartControlsValues {
+  return { ...state, [action.type]: action.value };
+}
 
 type ChartData = [number[], number[]];
 
@@ -58,11 +26,17 @@ interface ChartProps {
 }
 
 function Chart({ data }: ChartProps) {
-  console.log("data:", data);
+  const [controlsValues, dispatchControlsValues] = useReducer(
+    controlsValuesReducer,
+    CONTROLS_VALUES_INITIAL
+  );
 
   return (
     <>
-      <ChartControls />
+      <ChartControls
+        values={controlsValues}
+        dispatchValues={dispatchControlsValues}
+      />
       {data ? (
         <UplotReact data={data} options={OPTIONS} />
       ) : (
