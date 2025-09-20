@@ -1,24 +1,17 @@
-import "./ChartControls.css";
+import type { ChartOptions, ChartOptionsAction } from "./types";
 
-interface ChartControlsValues {
-  windowSize: number;
-  leftIndex: number;
-  refreshTime: number;
-  refreshSize: number;
+import "./OptionsControls.css";
+
+interface OptionsControlsProps {
+  options: ChartOptions;
+  dispatchOptions: (action: ChartOptionsAction) => void;
 }
 
-interface ChartControlValuesAction {
-  type: keyof ChartControlsValues;
-  value: number;
-}
-
-interface ChartControlsProps {
-  values: ChartControlsValues;
-  dispatchValues: (action: ChartControlValuesAction) => void;
-}
-
-function ChartControls({ values, dispatchValues }: ChartControlsProps) {
-  function createChangeHandler(type: keyof ChartControlsValues) {
+function OptionsControls({
+  options: values,
+  dispatchOptions: dispatchValues,
+}: OptionsControlsProps) {
+  function createChangeHandler(type: keyof ChartOptions) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = Number(event.target.value);
       dispatchValues({ type, value });
@@ -26,8 +19,8 @@ function ChartControls({ values, dispatchValues }: ChartControlsProps) {
   }
 
   return (
-    <form className="ChartControls">
-      <label className="ChartControls-field">
+    <form className="OptionsControls">
+      <label className="OptionsControls-field">
         Window size (N):
         <input
           type="number"
@@ -36,7 +29,7 @@ function ChartControls({ values, dispatchValues }: ChartControlsProps) {
           onChange={createChangeHandler("windowSize")}
         />
       </label>
-      <label className="ChartControls-field">
+      <label className="OptionsControls-field">
         Left index (S):
         <input
           type="number"
@@ -45,8 +38,8 @@ function ChartControls({ values, dispatchValues }: ChartControlsProps) {
           onChange={createChangeHandler("leftIndex")}
         />
       </label>
-      <label className="ChartControls-field">
-        Refresh time (T) [ms]:
+      <label className="OptionsControls-field">
+        Refresh time [ms] (T):
         <input
           type="number"
           name="refreshTime"
@@ -54,7 +47,7 @@ function ChartControls({ values, dispatchValues }: ChartControlsProps) {
           onChange={createChangeHandler("refreshTime")}
         />
       </label>
-      <label className="ChartControls-field">
+      <label className="OptionsControls-field">
         Refresh size (P):
         <input
           type="number"
@@ -63,15 +56,8 @@ function ChartControls({ values, dispatchValues }: ChartControlsProps) {
           onChange={createChangeHandler("refreshSize")}
         />
       </label>
-      <button type="button" className="ChartControls-button">
-        Start
-      </button>
     </form>
   );
 }
 
-export {
-  ChartControls,
-  type ChartControlsValues,
-  type ChartControlValuesAction,
-};
+export { OptionsControls, type ChartOptions };

@@ -1,4 +1,4 @@
-const OPTIONS = {
+const UPLOT_OPTIONS = {
   width: 800,
   height: 600,
   series: [
@@ -43,4 +43,4 @@ const OPTIONS = {
   ],
 };
 
-export { OPTIONS };
+export { UPLOT_OPTIONS };

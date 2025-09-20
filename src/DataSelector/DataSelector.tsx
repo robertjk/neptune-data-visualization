@@ -5,11 +5,10 @@
 import { type ParseResult } from "papaparse";
 import { useCSVReader } from "react-papaparse";
 
-import { type ChartData } from "../Chart";
-
 import "./DataSelector.css";
 
 type CSVFileRow = [number, number];
+type ChartData = [number[], number[]];
 
 function transformResultToChartData(
   result: ParseResult<CSVFileRow>

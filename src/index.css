@@ -55,6 +55,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
   &:hover {
     border-color: #646cff;
   }

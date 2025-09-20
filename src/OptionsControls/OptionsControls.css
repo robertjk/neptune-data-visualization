@@ -1,4 +1,4 @@
-.ChartControls {
+.OptionsControls {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2em 3.5em;
@@ -8,17 +8,10 @@
   }
 }
 
-.ChartControls-field {
+.OptionsControls-field {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   gap: 1.25em;
   text-wrap: nowrap;
-}
-
-.ChartControls-button {
-  grid-column: 1 / -1;
-  justify-self: center;
-  font-size: 1.3em;
-  font-weight: 700;
 }

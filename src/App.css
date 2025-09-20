@@ -16,13 +16,3 @@
   align-items: center;
   gap: 3em;
 }
-
-.App-noData {
-  display: grid;
-  place-items: center;
-  margin: 0;
-  border: 1px solid var(--color-grey-2);
-  width: 100%;
-  max-width: 800px;
-  height: 600px;
-}
