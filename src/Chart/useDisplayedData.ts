@@ -5,8 +5,8 @@ import type { ChartOptions } from "../OptionsControls";
 
 function extractDisplayedData(
   data: ChartData | undefined,
-  windowSize: number,
-  startIndex: number
+  dataWindowSize: ChartOptions["dataWindowSize"],
+  dataStartIndex: ChartOptions["dataStartIndex"]
 ): ChartData | undefined {
   if (!data) {
     return undefined;
@@ -14,19 +14,23 @@ function extractDisplayedData(
 
   const [dataX, dataY] = data;
   return [
-    dataX.slice(startIndex, startIndex + windowSize),
-    dataY.slice(startIndex, startIndex + windowSize),
+    dataX.slice(dataStartIndex, dataStartIndex + dataWindowSize),
+    dataY.slice(dataStartIndex, dataStartIndex + dataWindowSize),
   ];
 }
 
 function useDisplayedData(
   data: ChartData | undefined,
-  windowSize: ChartOptions["dataWindowSize"],
-  leftIndex: number
+  options: ChartOptions
 ): ChartData | undefined {
   return useMemo(
-    () => extractDisplayedData(data, windowSize, leftIndex),
-    [data, windowSize, leftIndex]
+    () =>
+      extractDisplayedData(
+        data,
+        options.dataWindowSize,
+        options.dataStartIndex
+      ),
+    [data, options.dataWindowSize, options.dataStartIndex]
   );
 }
 

@@ -23,11 +23,7 @@ function Chart({ data, options, dispatchOptions }: ChartProps) {
     options,
     dispatchOptions
   );
-  const displayedData = useDisplayedData(
-    data,
-    options.dataWindowSize,
-    options.dataStartIndex
-  );
+  const displayedData = useDisplayedData(data, options);
   const dataAggregates = useDataAggregates(displayedData);
 
   const isDataLoaded = Boolean(data);
