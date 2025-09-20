@@ -9,11 +9,26 @@ import { type ChartData } from "../Chart";
 
 import "./DataSelector.css";
 
-const CONFIG = {
-  dynamicTyping: true,
-};
-
 type CSVFileRow = [number, number];
+
+function transformResultToChartData(
+  result: ParseResult<CSVFileRow>
+): ChartData {
+  return result.data.reduce<ChartData>(
+    (result, [x, y]) => {
+      const [resultX, resultY] = result;
+      resultX.push(x);
+      resultY.push(y);
+      return result;
+    },
+    [[], []]
+  );
+}
+
+const CONFIG = {
+  skipEmptyLines: true,
+  transform: (value: string) => Number(value),
+};
 
 interface DataSelectorProps {
   onDataLoaded: (data: ChartData) => void;
@@ -23,18 +38,8 @@ function DataSelector({ onDataLoaded }: DataSelectorProps) {
   const { CSVReader } = useCSVReader();
 
   function handleUploadAccepted(result: ParseResult<CSVFileRow>) {
-    const chartData = result.data.reduce<ChartData>(
-      (result, [x, y]) => {
-        const [resultX, resultY] = result;
-        resultX.push(x);
-        resultY.push(y);
-        return result;
-      },
-      [[], []]
-    );
-    onDataLoaded(
-      chartData.map((array) => array.filter((_, index) => index < 1000))
-    );
+    const chartData = transformResultToChartData(result);
+    onDataLoaded(chartData);
   }
 
   return (
