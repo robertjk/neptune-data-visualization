@@ -25,6 +25,7 @@ function OptionsControls({
         <input
           type="number"
           name="windowSize"
+          min="1"
           value={values.windowSize}
           onChange={createChangeHandler("windowSize")}
         />
@@ -33,6 +34,7 @@ function OptionsControls({
         Start index (S):
         <input
           type="number"
+          min="0"
           name="leftIndex"
           value={values.startIndex}
           onChange={createChangeHandler("startIndex")}
@@ -43,6 +45,7 @@ function OptionsControls({
         <input
           type="number"
           name="refreshTime"
+          min="16"
           value={values.refreshTime}
           onChange={createChangeHandler("refreshTime")}
         />
@@ -51,6 +54,7 @@ function OptionsControls({
         Refresh index shift (P):
         <input
           type="number"
+          min="1"
           name="refreshSize"
           value={values.refreshIndexShift}
           onChange={createChangeHandler("refreshIndexShift")}
