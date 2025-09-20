@@ -1,16 +1,18 @@
 #root {
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  place-items: center;
-  gap: 2em;
+  align-items: center;
+  gap: 1.5em;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
 }
 
 .App-main {
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  place-items: center;
-  gap: 2em;
+  align-items: center;
+  gap: 3em;
 }

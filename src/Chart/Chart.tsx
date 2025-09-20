@@ -2,6 +2,8 @@ import UplotReact from "uplot-react";
 
 import "uplot/dist/uPlot.min.css";
 
+import { ChartControls } from "./ChartControls";
+
 import "./Chart.css";
 
 const OPTIONS = {
@@ -60,6 +62,7 @@ function Chart({ data }: ChartProps) {
 
   return (
     <>
+      <ChartControls />
       {data ? (
         <UplotReact data={data} options={OPTIONS} />
       ) : (
