@@ -6,8 +6,10 @@ import type { ChartData } from "../DataSelector";
 import type { ChartOptions } from "../OptionsControls";
 
 import { useAnimation } from "./useAnimation";
+import { useDataAggregates } from "./useDataAggregates";
 import { useDisplayedData } from "./useDisplayedData";
 import { UPLOT_OPTIONS } from "./Chart.config";
+
 import "./Chart.css";
 
 interface ChartProps {
@@ -23,6 +25,7 @@ function Chart({ data, options }: ChartProps) {
     options.dataWindowSize,
     dataStartIndex
   );
+  const dataAggregates = useDataAggregates(displayedData);
 
   const isDataLoaded = Boolean(data);
 
@@ -40,6 +43,15 @@ function Chart({ data, options }: ChartProps) {
         <UplotReact data={displayedData} options={UPLOT_OPTIONS} />
       ) : (
         <p className="Chart-noData">You need to load data first</p>
+      )}
+      {dataAggregates && (
+        <ul className="Chart-aggregates">
+          {dataAggregates.map(([name, value]) => (
+            <li key={name} className="Chart-aggregatesItem">
+              <span className=" Chart-aggregatesName">{name}:</span> {value}
+            </li>
+          ))}
+        </ul>
       )}
     </>
   );

@@ -13,3 +13,20 @@
   max-width: 800px;
   height: 600px;
 }
+
+.Chart-aggregates {
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2.5em;
+}
+
+.Chart-aggregatesItem {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.4em;
+}
+
+.Chart-aggregatesName {
+  font-weight: 700;
+}

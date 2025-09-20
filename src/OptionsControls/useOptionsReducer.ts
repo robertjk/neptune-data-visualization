@@ -2,9 +2,9 @@ import { useReducer } from "react";
 
 import type { ChartOptions, ChartOptionsAction } from "./types";
 
-const OPTIONS_INITIAL = {
-  windowSize: 100,
-  startIndex: 0,
+const OPTIONS_INITIAL: ChartOptions = {
+  dataWindowSize: 100,
+  dataStartIndex: 0,
   refreshTime: 500,
   refreshIndexShift: 10,
 };

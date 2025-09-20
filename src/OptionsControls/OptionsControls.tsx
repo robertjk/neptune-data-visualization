@@ -24,7 +24,7 @@ function OptionsControls({
         Data window size (N):
         <input
           type="number"
-          name="windowSize"
+          name="dataWindowSize"
           min="1"
           value={values.dataWindowSize}
           onChange={createChangeHandler("dataWindowSize")}
@@ -35,7 +35,7 @@ function OptionsControls({
         <input
           type="number"
           min="0"
-          name="startIndex"
+          name="dataStartIndex"
           value={values.dataStartIndex}
           onChange={createChangeHandler("dataStartIndex")}
         />
