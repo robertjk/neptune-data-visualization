@@ -4,15 +4,15 @@ import type { ChartOptions } from "../OptionsControls";
 
 function useAnimation(options: ChartOptions) {
   const [isAnimated, setIsAnimated] = useState(false);
-  const [leftIndex, setLeftIndex] = useState(options.startIndex);
+  const [dataStartIndex, setDataStartIndex] = useState(options.dataStartIndex);
 
   useEffect(
     function handleAnimation() {
       let intervalId: NodeJS.Timeout | undefined;
       if (isAnimated) {
         intervalId = setInterval(() => {
-          setLeftIndex(
-            (prevLeftIndex) => prevLeftIndex + options.refreshIndexShift
+          setDataStartIndex(
+            (prevStartIndex) => prevStartIndex + options.refreshIndexShift
           );
         }, options.refreshTime);
       }
@@ -34,7 +34,7 @@ function useAnimation(options: ChartOptions) {
 
   return {
     animationToggleLabel,
-    leftIndex,
+    dataStartIndex,
     toggleAnimation,
   };
 }

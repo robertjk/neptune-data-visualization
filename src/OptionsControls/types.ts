@@ -1,6 +1,6 @@
 interface ChartOptions {
-  windowSize: number;
-  startIndex: number;
+  dataWindowSize: number;
+  dataStartIndex: number;
   refreshTime: number;
   refreshIndexShift: number;
 }

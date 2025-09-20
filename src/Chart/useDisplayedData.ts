@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import type { ChartData } from "../DataSelector";
 import type { ChartOptions } from "../OptionsControls";
 
-function extractData(
+function extractDisplayedData(
   data: ChartData | undefined,
   windowSize: number,
   startIndex: number
@@ -19,15 +19,15 @@ function extractData(
   ];
 }
 
-function useExtractedData(
+function useDisplayedData(
   data: ChartData | undefined,
-  windowSize: ChartOptions["windowSize"],
+  windowSize: ChartOptions["dataWindowSize"],
   leftIndex: number
 ): ChartData | undefined {
   return useMemo(
-    () => extractData(data, windowSize, leftIndex),
+    () => extractDisplayedData(data, windowSize, leftIndex),
     [data, windowSize, leftIndex]
   );
 }
 
-export { useExtractedData };
+export { useDisplayedData };

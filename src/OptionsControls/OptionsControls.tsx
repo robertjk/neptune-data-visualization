@@ -21,31 +21,31 @@ function OptionsControls({
   return (
     <form className="OptionsControls">
       <label className="OptionsControls-field">
-        Window size (N):
+        Data window size (N):
         <input
           type="number"
           name="windowSize"
           min="1"
-          value={values.windowSize}
-          onChange={createChangeHandler("windowSize")}
+          value={values.dataWindowSize}
+          onChange={createChangeHandler("dataWindowSize")}
         />
       </label>
       <label className="OptionsControls-field">
-        Start index (S):
+        Data start index (S):
         <input
           type="number"
           min="0"
-          name="leftIndex"
-          value={values.startIndex}
-          onChange={createChangeHandler("startIndex")}
+          name="startIndex"
+          value={values.dataStartIndex}
+          onChange={createChangeHandler("dataStartIndex")}
         />
       </label>
       <label className="OptionsControls-field">
         Refresh time [ms] (T):
         <input
           type="number"
-          name="refreshTime"
           min="16"
+          name="refreshTime"
           value={values.refreshTime}
           onChange={createChangeHandler("refreshTime")}
         />
