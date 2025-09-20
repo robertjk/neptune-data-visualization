@@ -1,10 +1,10 @@
-import type { ChartOptions, ChartOptionsAction } from "./types";
+import type { ChartOptions, ChartOptionsDispatch } from "./types";
 
 import "./OptionsControls.css";
 
 interface OptionsControlsProps {
   options: ChartOptions;
-  dispatchOptions: (action: ChartOptionsAction) => void;
+  dispatchOptions: ChartOptionsDispatch;
 }
 
 function OptionsControls({
@@ -64,4 +64,4 @@ function OptionsControls({
   );
 }
 
-export { OptionsControls, type ChartOptions };
+export { OptionsControls, type ChartOptions, type ChartOptionsDispatch };

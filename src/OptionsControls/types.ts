@@ -10,4 +10,6 @@ interface ChartOptionsAction {
   value: number;
 }
 
-export { type ChartOptions, type ChartOptionsAction };
+type ChartOptionsDispatch = (action: ChartOptionsAction) => void;
+
+export { type ChartOptions, type ChartOptionsDispatch };

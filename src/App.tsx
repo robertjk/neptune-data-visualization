@@ -22,7 +22,11 @@ function App() {
       <main className="App-main">
         <DataSelector onDataLoaded={handleDataLoaded} />
         <OptionsControls options={options} dispatchOptions={dispatchOptions} />
-        <Chart data={data} options={options} />
+        <Chart
+          data={data}
+          options={options}
+          dispatchOptions={dispatchOptions}
+        />
       </main>
     </>
   );

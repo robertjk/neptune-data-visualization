@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 
-import type { ChartOptions } from "../OptionsControls";
+import type { ChartOptions, ChartOptionsDispatch } from "../OptionsControls";
 
-function useAnimation(options: ChartOptions) {
+function useAnimation(
+  options: ChartOptions,
+  dispatchOptions: ChartOptionsDispatch
+) {
   const [isAnimated, setIsAnimated] = useState(false);
-  const [dataStartIndex, setDataStartIndex] = useState(options.dataStartIndex);
 
   useEffect(
     function handleAnimation() {
       let intervalId: NodeJS.Timeout | undefined;
+
       if (isAnimated) {
         intervalId = setInterval(() => {
-          setDataStartIndex(
-            (prevStartIndex) => prevStartIndex + options.refreshIndexShift
-          );
+          const newDataStartIndex =
+            options.dataStartIndex + options.refreshIndexShift;
+          dispatchOptions({ type: "dataStartIndex", value: newDataStartIndex });
         }, options.refreshTime);
       }
 
@@ -23,18 +26,21 @@ function useAnimation(options: ChartOptions) {
         }
       };
     },
-    [isAnimated, options.refreshTime, options.refreshIndexShift]
+    [
+      isAnimated,
+      dispatchOptions,
+      options.dataStartIndex,
+      options.refreshTime,
+      options.refreshIndexShift,
+    ]
   );
-
-  const animationToggleLabel = isAnimated ? "Pause" : "Start";
 
   function toggleAnimation() {
     setIsAnimated((prevIsAnimated) => !prevIsAnimated);
   }
 
   return {
-    animationToggleLabel,
-    dataStartIndex,
+    isAnimated,
     toggleAnimation,
   };
 }
