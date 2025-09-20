@@ -21,16 +21,16 @@ function Chart({ data, options }: ChartProps) {
   const dataAggregates = useDataAggregates(displayedData);
 
   return (
-    <>
-        <UplotReact data={displayedData} options={UPLOT_OPTIONS} />
-        <ul className="Chart-aggregates">
-          {dataAggregates.map(([name, value]) => (
-            <li key={name} className="Chart-aggregatesItem">
-              <span className=" Chart-aggregatesName">{name}:</span> {value}
-            </li>
-          ))}
-        </ul>
-    </>
+    <div className="Chart">
+      <UplotReact data={displayedData} options={UPLOT_OPTIONS} />
+      <ul className="Chart-aggregates">
+        {dataAggregates.map(([name, value]) => (
+          <li key={name} className="Chart-aggregatesItem">
+            <span className=" Chart-aggregatesName">{name}:</span> {value}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

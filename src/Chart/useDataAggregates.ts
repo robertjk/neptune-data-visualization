@@ -9,9 +9,8 @@ interface DataAggregates {
   variance: number;
 }
 
-type DataAggregatesFormatted = {
-  [key in keyof DataAggregates]: string;
-};
+type DataAggregatesCapitalizedKeys = Capitalize<keyof DataAggregates>;
+type DataAggregatesFormattedList = [DataAggregatesCapitalizedKeys, string][];
 
 function getDataAggregates(data: ChartData): DataAggregates {
   const [, dataY] = data;
@@ -44,29 +43,27 @@ function getDataAggregates(data: ChartData): DataAggregates {
   };
 }
 
-function capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function capitalize(str: keyof DataAggregates): DataAggregatesCapitalizedKeys {
+  return (str.charAt(0).toUpperCase() +
+    str.slice(1)) as DataAggregatesCapitalizedKeys;
 }
 
 function formatDataAggregates(
   aggregates: DataAggregates
-): DataAggregatesFormatted {
+): DataAggregatesFormattedList {
   const aggregatesList = Object.entries(aggregates) as [
     keyof DataAggregates,
     number
   ][];
 
-  const aggregatesFormatted = aggregatesList.map(
-    ([name, value]: [keyof DataAggregates, number]) => [
-      capitalize(name),
-      value.toFixed(3),
-    ]
-  );
+  const aggregatesFormattedList = aggregatesList.map<
+    [DataAggregatesCapitalizedKeys, string]
+  >(([name, value]) => [capitalize(name), value.toFixed(3)]);
 
-  return aggregatesFormatted;
+  return aggregatesFormattedList;
 }
 
-function useDataAggregates(data: ChartData): DataAggregatesFormatted {
+function useDataAggregates(data: ChartData): DataAggregatesFormattedList {
   return useMemo(() => {
     const dataAggregates = getDataAggregates(data);
     return formatDataAggregates(dataAggregates);

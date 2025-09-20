@@ -1,4 +1,12 @@
+.Chart {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 1.5em;
+}
+
 .Chart-aggregates {
+  margin: 0;
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
