@@ -14,12 +14,12 @@ function App() {
 
   return (
     <>
-      <header className="App-header">
+      <header>
         <h1>Neptune Data Visualization</h1>
       </header>
       <main className="App-main">
         <DataSelector onDataLoaded={handleDataLoaded} />
-        <Chart />
+        <Chart data={data} />
       </main>
     </>
   );

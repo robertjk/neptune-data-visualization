@@ -5,12 +5,15 @@
 import { type ParseResult } from "papaparse";
 import { useCSVReader } from "react-papaparse";
 
+import { type ChartData } from "../Chart";
+
 import "./DataSelector.css";
 
-const CONFIG = { dynamicTyping: true };
+const CONFIG = {
+  dynamicTyping: true,
+};
 
-type ChartDataRow = [number, number];
-type ChartData = ChartDataRow[];
+type CSVFileRow = [number, number];
 
 interface DataSelectorProps {
   onDataLoaded: (data: ChartData) => void;
@@ -19,8 +22,19 @@ interface DataSelectorProps {
 function DataSelector({ onDataLoaded }: DataSelectorProps) {
   const { CSVReader } = useCSVReader();
 
-  function handleUploadAccepted(result: ParseResult<ChartDataRow>) {
-    onDataLoaded(result.data);
+  function handleUploadAccepted(result: ParseResult<CSVFileRow>) {
+    const chartData = result.data.reduce<ChartData>(
+      (result, [x, y]) => {
+        const [resultX, resultY] = result;
+        resultX.push(x);
+        resultY.push(y);
+        return result;
+      },
+      [[], []]
+    );
+    onDataLoaded(
+      chartData.map((array) => array.filter((_, index) => index < 1000))
+    );
   }
 
   return (

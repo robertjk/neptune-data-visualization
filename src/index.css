@@ -1,11 +1,14 @@
 :root {
-  --color-text: rgba(255, 255, 255, 0.87);
-  --color-background: #242424;
-
+  --color-white: rgba(255, 255, 255, 0.87);
+  --color-grey-1: #242424;
+  --color-grey-2: #333333;
   --color-blue-1: #055ea7;
   --color-blue-2: #646cff;
   --color-blue-3: #535bf2;
   --color-blue-4: #4bcff0;
+
+  --color-text: var(--color-white);
+  --color-background: var(--color-grey-1);
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

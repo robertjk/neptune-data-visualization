@@ -2,23 +2,19 @@ import UplotReact from "uplot-react";
 
 import "uplot/dist/uPlot.min.css";
 
+import "./Chart.css";
+
 const OPTIONS = {
   width: 800,
   height: 600,
-  id: "chart",
   series: [
     {
       label: "X",
     },
     {
-      label: "Y1",
+      label: "Y",
       stroke: "blue",
       width: 3,
-    },
-    {
-      label: "Y2",
-      stroke: "green",
-      width: 7,
     },
   ],
   scales: {
@@ -36,7 +32,7 @@ const OPTIONS = {
       stroke: "white",
       grid: {
         show: true,
-        stroke: "white",
+        stroke: "rgba(255, 255, 255, 0.87)",
         width: 1,
       },
     },
@@ -46,26 +42,31 @@ const OPTIONS = {
       stroke: "white",
       grid: {
         show: true,
-        stroke: "white",
+        stroke: "rgba(255, 255, 255, 0.87)",
         width: 1,
       },
     },
   ],
 };
 
-function Chart() {
+type ChartData = [number[], number[]];
+
+interface ChartProps {
+  data?: ChartData;
+}
+
+function Chart({ data }: ChartProps) {
+  console.log("data:", data);
+
   return (
     <>
-      <UplotReact
-        data={[
-          [0, 1, 2, 3, 4, 5, 6],
-          [0, 1, 4, 9, 16, 25, 36],
-          [0, null, 14, null, 26, null, 50],
-        ]}
-        options={OPTIONS}
-      />
+      {data ? (
+        <UplotReact data={data} options={OPTIONS} />
+      ) : (
+        <p className="Chart-noData">You need to load data first</p>
+      )}
     </>
   );
 }
 
-export { Chart };
+export { Chart, type ChartData };
