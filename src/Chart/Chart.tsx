@@ -7,7 +7,7 @@ import {
   ChartControls,
   type ChartControlsValues,
   type ChartControlValuesAction,
-} from "./ChartControls";
+} from "./ChartControls/ChartControls";
 import { CONTROLS_VALUES_INITIAL, OPTIONS } from "./Chart.config";
 
 import "./Chart.css";
