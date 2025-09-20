@@ -1,8 +1,8 @@
 interface ChartOptions {
   windowSize: number;
-  leftIndex: number;
+  startIndex: number;
   refreshTime: number;
-  refreshSize: number;
+  refreshIndexShift: number;
 }
 
 interface ChartOptionsAction {

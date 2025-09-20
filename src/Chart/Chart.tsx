@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import UplotReact from "uplot-react";
 
 import "uplot/dist/uPlot.min.css";
@@ -6,24 +5,10 @@ import "uplot/dist/uPlot.min.css";
 import type { ChartData } from "../DataSelector";
 import type { ChartOptions } from "../OptionsControls";
 
+import { useExtractedData } from "./useExtractedData";
+import { useAnimation } from "./useAnimation";
 import { UPLOT_OPTIONS } from "./Chart.config";
 import "./Chart.css";
-
-function extractData(
-  data: ChartData | undefined,
-  windowSize: number,
-  leftIndex: number
-): ChartData | undefined {
-  if (!data) {
-    return undefined;
-  }
-
-  const [dataX, dataY] = data;
-  return [
-    dataX.slice(leftIndex, leftIndex + windowSize),
-    dataY.slice(leftIndex, leftIndex + windowSize),
-  ];
-}
 
 interface ChartProps {
   data?: ChartData;
@@ -31,17 +16,21 @@ interface ChartProps {
 }
 
 function Chart({ data, options }: ChartProps) {
-  const isDataLoaded = Boolean(data);
+  const { animationToggleLabel, leftIndex, toggleAnimation } =
+    useAnimation(options);
+  const extractedData = useExtractedData(data, options.windowSize, leftIndex);
 
-  const extractedData = useMemo(
-    () => extractData(data, options.windowSize, options.leftIndex),
-    [data, options.windowSize, options.leftIndex]
-  );
+  const isDataLoaded = Boolean(data);
 
   return (
     <>
-      <button type="button" className="Chart-button" disabled={!isDataLoaded}>
-        Start
+      <button
+        type="button"
+        className="Chart-button"
+        disabled={!isDataLoaded}
+        onClick={toggleAnimation}
+      >
+        {animationToggleLabel}
       </button>
       {extractedData ? (
         <UplotReact data={extractedData} options={UPLOT_OPTIONS} />

@@ -2,27 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access,
    @typescript-eslint/no-unsafe-assignment */
 
-import { type ParseResult } from "papaparse";
 import { useCSVReader } from "react-papaparse";
 
+import { transformResult } from "./transformResult";
+import type { ChartData, DataParseResult } from "./types";
+
 import "./DataSelector.css";
-
-type CSVFileRow = [number, number];
-type ChartData = [number[], number[]];
-
-function transformResultToChartData(
-  result: ParseResult<CSVFileRow>
-): ChartData {
-  return result.data.reduce<ChartData>(
-    (result, [x, y]) => {
-      const [resultX, resultY] = result;
-      resultX.push(x);
-      resultY.push(y);
-      return result;
-    },
-    [[], []]
-  );
-}
 
 const CONFIG = {
   skipEmptyLines: true,
@@ -36,8 +21,8 @@ interface DataSelectorProps {
 function DataSelector({ onDataLoaded }: DataSelectorProps) {
   const { CSVReader } = useCSVReader();
 
-  function handleUploadAccepted(result: ParseResult<CSVFileRow>) {
-    const chartData = transformResultToChartData(result);
+  function handleUploadAccepted(result: DataParseResult) {
+    const chartData = transformResult(result);
     onDataLoaded(chartData);
   }
 

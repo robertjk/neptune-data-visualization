@@ -4,9 +4,9 @@ import type { ChartOptions, ChartOptionsAction } from "./types";
 
 const OPTIONS_INITIAL = {
   windowSize: 100,
-  leftIndex: 0,
+  startIndex: 0,
   refreshTime: 500,
-  refreshSize: 10,
+  refreshIndexShift: 10,
 };
 
 function optionsReducer(

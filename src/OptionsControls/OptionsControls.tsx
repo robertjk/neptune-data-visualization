@@ -30,12 +30,12 @@ function OptionsControls({
         />
       </label>
       <label className="OptionsControls-field">
-        Left index (S):
+        Start index (S):
         <input
           type="number"
           name="leftIndex"
-          value={values.leftIndex}
-          onChange={createChangeHandler("leftIndex")}
+          value={values.startIndex}
+          onChange={createChangeHandler("startIndex")}
         />
       </label>
       <label className="OptionsControls-field">
@@ -48,12 +48,12 @@ function OptionsControls({
         />
       </label>
       <label className="OptionsControls-field">
-        Refresh size (P):
+        Refresh index shift (P):
         <input
           type="number"
           name="refreshSize"
-          value={values.refreshSize}
-          onChange={createChangeHandler("refreshSize")}
+          value={values.refreshIndexShift}
+          onChange={createChangeHandler("refreshIndexShift")}
         />
       </label>
     </form>
