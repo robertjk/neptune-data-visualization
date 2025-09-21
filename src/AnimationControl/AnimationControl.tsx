@@ -1,4 +1,4 @@
-import type { ChartOptions, ChartOptionsDispatch } from "../OptionsControls";
+import type { ChartOptions, ChartOptionsDispatch } from "~/OptionsControls";
 
 import { useAnimation } from "./useAnimation";
 

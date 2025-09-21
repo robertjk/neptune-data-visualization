@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import type { ChartOptions, ChartOptionsDispatch } from "../OptionsControls";
+import type { ChartOptions, ChartOptionsDispatch } from "~/OptionsControls";
 
 function useAnimation(
   options: ChartOptions,

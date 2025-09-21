@@ -2,8 +2,8 @@ import UplotReact from "uplot-react";
 
 import "uplot/dist/uPlot.min.css";
 
-import type { ChartData } from "../DataSelector";
-import type { ChartOptions } from "../OptionsControls";
+import type { ChartData } from "~/DataSelector";
+import type { ChartOptions } from "~/OptionsControls";
 
 import { useDataAggregates } from "./useDataAggregates";
 import { useDisplayedData } from "./useDisplayedData";

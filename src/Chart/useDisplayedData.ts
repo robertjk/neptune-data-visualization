@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
-import type { ChartData } from "../DataSelector";
-import type { ChartOptions } from "../OptionsControls";
+import type { ChartData } from "~/DataSelector";
+import type { ChartOptions } from "~/OptionsControls";
 
 function extractDisplayedData(
   data: ChartData,

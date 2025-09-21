@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import type { ChartData } from "../DataSelector";
+import type { ChartData } from "~/DataSelector";
 
 interface DataAggregates {
   min: number;
