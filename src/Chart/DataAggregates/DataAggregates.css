@@ -1,0 +1,17 @@
+.DataAggregates-aggregates {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2.5em;
+}
+
+.DataAggregates-aggregatesItem {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.4em;
+}
+
+.DataAggregates-aggregatesName {
+  font-weight: 700;
+}
