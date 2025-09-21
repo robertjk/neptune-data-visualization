@@ -26,9 +26,8 @@ $ bun install
 
 ### Load data
 
-Then load some data using _Browse file_ button. Inside the repository there is an example data file
-[data_points.example.csv](https://github.com/robertjk/neptune-data-visualization/blob/master/data_points.example.csv).
-You can use it for testing purposes.
+Then load some data using _Browse file_ button. Inside the repository there is a file you can use for testing purposes:
+[data-example.1M.csv](https://github.com/robertjk/neptune-data-visualization/blob/master/data-example.1M.csv).
 
 ### Plot and animation
 
