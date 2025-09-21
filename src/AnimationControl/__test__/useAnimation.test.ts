@@ -12,7 +12,8 @@ test("Initially not animated", () => {
         refreshTime: 1000,
         refreshIndexShift: 1,
       },
-      vi.fn()
+      vi.fn(),
+      1000
     )
   );
 
@@ -28,7 +29,8 @@ test("Starts to animate after toggling", () => {
         refreshTime: 1000,
         refreshIndexShift: 1,
       },
-      vi.fn()
+      vi.fn(),
+      1000
     )
   );
 
@@ -48,9 +50,8 @@ test("Dispatches dataStartIndex updates with proper frequency when animating", (
     refreshIndexShift: 7,
   };
   const dispatchOptions = vi.fn();
-
   const { result, rerender } = renderHook(() =>
-    useAnimation(options, dispatchOptions)
+    useAnimation(options, dispatchOptions, 1000)
   );
 
   act(() => {
@@ -80,5 +81,42 @@ test("Dispatches dataStartIndex updates with proper frequency when animating", (
   expect(dispatchOptions).toHaveBeenLastCalledWith({
     type: "dataStartIndex",
     value: 204,
+  });
+});
+
+test("Stops animating when reaches end of data", () => {
+  vi.useFakeTimers();
+  const options = {
+    dataWindowSize: 10,
+    dataStartIndex: 50,
+    refreshTime: 10,
+    refreshIndexShift: 7,
+  };
+  const dispatchOptions = vi.fn(({ value }: { value: number }) => {
+    options.dataStartIndex = value;
+  });
+
+  const { result, rerender } = renderHook(() =>
+    useAnimation(options, dispatchOptions, 1000)
+  );
+
+  act(() => {
+    result.current.toggleAnimation();
+  });
+
+  expect(result.current.isAnimated).toBe(true);
+  expect(dispatchOptions).not.toBeCalled();
+
+  vi.advanceTimersByTime(10000);
+
+  act(() => {
+    rerender();
+  });
+
+  expect(options.dataStartIndex).toBe(990);
+  expect(result.current.isAnimated).toBe(false);
+  expect(dispatchOptions).toHaveBeenLastCalledWith({
+    type: "dataStartIndex",
+    value: 990,
   });
 });
