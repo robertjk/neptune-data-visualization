@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import type { ChartData } from "~/DataSelector";
+import type { ChartDataFull } from "../types";
 
 interface DataAggregatesResult {
   min: number;
@@ -9,8 +9,8 @@ interface DataAggregatesResult {
   variance: number;
 }
 
-function getDataAggregates(data: ChartData): DataAggregatesResult {
-  const [, dataY] = data;
+function getDataAggregates(data: ChartDataFull): DataAggregatesResult {
+  const { y: dataY } = data;
 
   let min = Infinity;
   let max = -Infinity;
@@ -40,7 +40,7 @@ function getDataAggregates(data: ChartData): DataAggregatesResult {
   };
 }
 
-function useDataAggregates(data: ChartData): DataAggregatesResult {
+function useDataAggregates(data: ChartDataFull): DataAggregatesResult {
   return useMemo(() => getDataAggregates(data), [data]);
 }
 

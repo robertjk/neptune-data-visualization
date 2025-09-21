@@ -1,4 +1,4 @@
-import type { ChartData } from "~/DataSelector";
+import type { ChartDataFull } from "../types";
 
 import {
   useDataAggregates,
@@ -7,11 +7,13 @@ import {
 
 import "./DataAggregates.css";
 
+const VALUE_PRECISION = 3;
+
 interface DataAggregatesProps {
-  data: ChartData;
+  data: ChartDataFull;
 }
 
-const dataAggregatesLabels: Record<keyof DataAggregates, string> = {
+const dataAggregatesLabels: Record<keyof DataAggregatesResult, string> = {
   min: "Min",
   max: "Max",
   average: "Average",
@@ -23,7 +25,10 @@ function DataAggregates({ data }: DataAggregatesProps) {
 
   const dataAggregatesFormatted = (
     Object.entries(dataAggregates) as [keyof DataAggregatesResult, number][]
-  ).map(([name, value]) => [dataAggregatesLabels[name], value.toFixed(2)]);
+  ).map(([name, value]) => [
+    dataAggregatesLabels[name],
+    value.toFixed(VALUE_PRECISION),
+  ]);
 
   return (
     <ul className="DataAggregates-aggregates">

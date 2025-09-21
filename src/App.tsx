@@ -1,17 +1,17 @@
 import { useState } from "react";
 
 import { AnimationControl } from "./AnimationControl";
-import { Chart } from "./Chart";
-import { DataSelector, type ChartData } from "./DataSelector";
+import { Chart, type ChartDataFull } from "./Chart";
+import { DataSelector } from "./DataSelector";
 import { OptionsControls, useOptionsReducer } from "./OptionsControls";
 
 import "./App.css";
 
 function App() {
-  const [data, setData] = useState<ChartData | undefined>(undefined);
+  const [data, setData] = useState<ChartDataFull | undefined>(undefined);
   const [options, dispatchOptions] = useOptionsReducer();
 
-  function handleDataLoaded(loadedData: ChartData) {
+  function handleDataLoaded(loadedData: ChartDataFull) {
     setData(loadedData);
   }
 

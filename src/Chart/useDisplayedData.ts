@@ -1,21 +1,24 @@
 import { useMemo } from "react";
 
-import type { ChartData } from "~/DataSelector";
 import type { ChartOptions } from "~/OptionsControls";
+import type { ChartDataFull } from "./types";
 
 function extractDisplayedData(
-  data: ChartData,
+  data: ChartDataFull,
   dataWindowSize: ChartOptions["dataWindowSize"],
   dataStartIndex: ChartOptions["dataStartIndex"]
-): ChartData {
-  const [dataX, dataY] = data;
-  return [
-    dataX.slice(dataStartIndex, dataStartIndex + dataWindowSize),
-    dataY.slice(dataStartIndex, dataStartIndex + dataWindowSize),
-  ];
+): ChartDataFull {
+  const dataEndIndex = dataStartIndex + dataWindowSize;
+  return {
+    x: data.x.slice(dataStartIndex, dataEndIndex),
+    y: data.y.slice(dataStartIndex, dataEndIndex),
+  };
 }
 
-function useDisplayedData(data: ChartData, options: ChartOptions): ChartData {
+function useDisplayedData(
+  data: ChartDataFull,
+  options: ChartOptions
+): ChartDataFull {
   return useMemo(
     () =>
       extractDisplayedData(

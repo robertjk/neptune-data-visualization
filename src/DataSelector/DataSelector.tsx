@@ -4,8 +4,10 @@
 
 import { useCSVReader } from "react-papaparse";
 
+import type { ChartDataFull } from "~/Chart";
+
 import { transformResult } from "./transformResult";
-import type { ChartData, DataParseResult } from "./types";
+import type { DataParseResult } from "./types";
 
 import "./DataSelector.css";
 
@@ -16,7 +18,7 @@ const CONFIG = {
 };
 
 interface DataSelectorProps {
-  onDataLoaded: (data: ChartData) => void;
+  onDataLoaded: (data: ChartDataFull) => void;
 }
 
 function DataSelector({ onDataLoaded }: DataSelectorProps) {
@@ -47,4 +49,4 @@ function DataSelector({ onDataLoaded }: DataSelectorProps) {
   );
 }
 
-export { DataSelector, type ChartData };
+export { DataSelector };

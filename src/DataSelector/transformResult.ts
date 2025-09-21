@@ -1,14 +1,15 @@
-import type { ChartData, DataParseResult } from "./types";
+import type { ChartDataFull } from "~/Chart";
 
-function transformResult(result: DataParseResult): ChartData {
-  return result.data.reduce<ChartData>(
+import type { DataParseResult } from "./types";
+
+function transformResult(result: DataParseResult): ChartDataFull {
+  return result.data.reduce<ChartDataFull>(
     (result, [x, y]) => {
-      const [resultX, resultY] = result;
-      resultX.push(x);
-      resultY.push(y);
+      result.x.push(x);
+      result.y.push(y);
       return result;
     },
-    [[], []]
+    { x: [], y: [] }
   );
 }
 
