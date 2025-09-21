@@ -6,7 +6,7 @@ import { useDataAggregates } from "../useDataAggregates";
 describe("Calculates proper aggregates", () => {
   test("for simple data", () => {
     const { result } = renderHook(() =>
-      useDataAggregates([[], [1, 2, 3, 4, 5]])
+      useDataAggregates({ x: [], y: [1, 2, 3, 4, 5] })
     );
     expect(result.current).toEqual({
       min: 1,
@@ -18,7 +18,7 @@ describe("Calculates proper aggregates", () => {
 
   test("for data mixing positive and negative values", () => {
     const { result } = renderHook(() =>
-      useDataAggregates([[], [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]])
+      useDataAggregates({ x: [], y: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5] })
     );
     expect(result.current).toEqual({
       min: -5,
@@ -29,7 +29,7 @@ describe("Calculates proper aggregates", () => {
   });
 
   test("for data with a single value", () => {
-    const { result } = renderHook(() => useDataAggregates([[], [101]]));
+    const { result } = renderHook(() => useDataAggregates({ x: [], y: [101] }));
     expect(result.current).toEqual({
       min: 101,
       max: 101,
