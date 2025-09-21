@@ -28,6 +28,7 @@ function OptionsControls({
           min="1"
           value={values.dataWindowSize}
           onChange={createChangeHandler("dataWindowSize")}
+          className="OptionsControls-input"
         />
       </label>
       <label className="OptionsControls-field">
@@ -38,6 +39,7 @@ function OptionsControls({
           name="dataStartIndex"
           value={values.dataStartIndex}
           onChange={createChangeHandler("dataStartIndex")}
+          className="OptionsControls-input"
         />
       </label>
       <label className="OptionsControls-field">
@@ -48,6 +50,7 @@ function OptionsControls({
           name="refreshTime"
           value={values.refreshTime}
           onChange={createChangeHandler("refreshTime")}
+          className="OptionsControls-input"
         />
       </label>
       <label className="OptionsControls-field">
@@ -58,6 +61,7 @@ function OptionsControls({
           name="refreshSize"
           value={values.refreshIndexShift}
           onChange={createChangeHandler("refreshIndexShift")}
+          className="OptionsControls-input"
         />
       </label>
     </form>
