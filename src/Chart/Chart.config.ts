@@ -22,7 +22,6 @@ const UPLOT_OPTIONS = {
   axes: [
     {
       show: true,
-      label: "X",
       stroke: "white",
       grid: {
         show: true,
@@ -32,7 +31,6 @@ const UPLOT_OPTIONS = {
     },
     {
       show: true,
-      label: "Y",
       stroke: "white",
       grid: {
         show: true,
