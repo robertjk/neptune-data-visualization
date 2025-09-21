@@ -8,11 +8,16 @@ Application for displaying plots of simple (x, y) numerical data. The plots can 
 
 You need to have [Bun](https://bun.com/) installed.
 
-### Install dependencies
+### Steps
 
-```bash
-$ bun install
-```
+1. Install dependencies:
+   ```bash
+   $ bun install
+   ```
+2. Build the application:
+   ```bash
+   $ bun run build
+   ```
 
 ## Instructions
 
@@ -20,9 +25,9 @@ $ bun install
 
 1. Run a server with the application:
    ```bash
-   $ bun run dev
+   $ bun run preview
    ```
-2. Open [http://localhost:5173/](http://localhost:5173) to see the app.
+2. Open [http://localhost:4173/](http://localhost:4173) to see the app.
 
 ### Load data
 
