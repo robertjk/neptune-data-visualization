@@ -9,6 +9,12 @@ function extractDisplayedData(
   dataStartIndex: ChartOptions["dataStartIndex"]
 ): ChartDataFull {
   const dataEndIndex = dataStartIndex + dataWindowSize;
+
+  // Performance optimization: Return original if showing all data
+  if (dataStartIndex === 0 && dataEndIndex >= data.x.length) {
+    return data;
+  }
+
   return {
     x: data.x.slice(dataStartIndex, dataEndIndex),
     y: data.y.slice(dataStartIndex, dataEndIndex),

@@ -25,7 +25,11 @@ function downsampleData(data: ChartDataFull): ChartDataSampled | undefined {
     let ySum = 0;
 
     const startIdx = Math.floor((sampleIdx * dataLength) / DATA_MAX_SIZE);
-    const endIdx = Math.floor(((sampleIdx + 1) * dataLength) / DATA_MAX_SIZE);
+    const nextStartIdx = Math.floor(
+      ((sampleIdx + 1) * dataLength) / DATA_MAX_SIZE
+    );
+    const endIdx = Math.min(nextStartIdx, dataLength);
+
     for (let dataIdx = startIdx; dataIdx < endIdx; dataIdx += 1) {
       const yData = data.y[dataIdx];
       yMin = Math.min(yMin, yData);
