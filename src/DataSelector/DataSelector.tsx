@@ -11,7 +11,8 @@ import "./DataSelector.css";
 
 const CONFIG = {
   skipEmptyLines: true,
-  transform: (value: string) => Number(value),
+  dynamicTyping: true,
+  worker: true,
 };
 
 interface DataSelectorProps {
