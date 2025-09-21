@@ -1,3 +1,4 @@
+import type { ChartDataFull } from "~/Chart";
 import type { ChartOptions, ChartOptionsDispatch } from "~/OptionsControls";
 
 import { useAnimation } from "./useAnimation";
@@ -7,29 +8,41 @@ import "./AnimationControl.css";
 interface AnimationControlProps {
   options: ChartOptions;
   dispatchOptions: ChartOptionsDispatch;
-  isDataLoaded: boolean;
+  data?: ChartDataFull;
 }
 
 function AnimationControl({
   options,
   dispatchOptions,
-  isDataLoaded,
+  data,
 }: AnimationControlProps) {
-  const { isAnimated, toggleAnimation } = useAnimation(
+  const dataLength = data ? data.x.length : 0;
+  const isDataLoaded = Boolean(data);
+
+  const { isAnimated, toggleAnimation, fps } = useAnimation(
     options,
-    dispatchOptions
+    dispatchOptions,
+    dataLength
   );
 
+  const animationEnd =
+    options.dataStartIndex + options.dataWindowSize >= dataLength;
+  const buttonDisabled = !isDataLoaded || animationEnd;
+  const fpsLabel =
+    isAnimated && fps ? (
+      <small className="AnimationControl-fps">FPS: {String(fps)}</small>
+    ) : null;
   const animationToggleLabel = isAnimated ? "Pause" : "Start";
 
   return (
     <button
       type="button"
       className="AnimationControl-button"
-      disabled={!isDataLoaded}
+      disabled={buttonDisabled}
       onClick={toggleAnimation}
     >
       {animationToggleLabel}
+      {fpsLabel}
     </button>
   );
 }

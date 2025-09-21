@@ -26,7 +26,7 @@ function App() {
         <AnimationControl
           options={options}
           dispatchOptions={dispatchOptions}
-          isDataLoaded={Boolean(data)}
+          data={data}
         />
         {data ? (
           <Chart data={data} options={options} />

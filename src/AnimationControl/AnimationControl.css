@@ -1,5 +1,15 @@
 .AnimationControl-button {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
   font-size: 1.3em;
   font-weight: 700;
-  width: 5.15em;
+  width: 6em;
+  height: 3em;
+}
+
+.AnimationControl-fps {
+  font-size: 0.6em;
+  font-weight: 400;
 }
