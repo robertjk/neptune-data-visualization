@@ -11,4 +11,8 @@ export default defineConfig({
       "~": "/src",
     },
   },
+  test: {
+    environment: "jsdom",
+    setupFiles: ["config/vitest-cleanup-after-each.ts"],
+  },
 });
