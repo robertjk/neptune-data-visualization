@@ -51,7 +51,7 @@ const UPLOT_OPTIONS_SAMPLED: Options = {
   ...UPLOT_OPTIONS_COMMON,
   series: [
     {
-      label: "X avg",
+      label: "X",
     },
     {
       label: "Y avg",
