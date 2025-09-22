@@ -11,6 +11,14 @@ export default defineConfig({
       "~": "/src",
     },
   },
+  server: {
+    headers: {
+      // Required to enable SharedArrayBuffer in browsers:
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer#security_requirements
+      "Cross-Origin-Embedder-Policy": "require-corp",
+      "Cross-Origin-Opener-Policy": "same-origin",
+    },
+  },
   test: {
     environment: "jsdom",
     setupFiles: ["config/vitest-cleanup-after-each.ts"],
