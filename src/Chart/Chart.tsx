@@ -26,7 +26,7 @@ function Chart({ data, options }: ChartProps) {
 
   const uplotData: AlignedData = isDataDownsampled
     ? [
-        displayedDataSampled.xAvg,
+        displayedDataSampled.x,
         displayedDataSampled.yAvg,
         displayedDataSampled.yMin,
         displayedDataSampled.yMax,

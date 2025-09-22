@@ -4,7 +4,7 @@ interface ChartDataFull {
 }
 
 interface ChartDataSampled {
-  xAvg: number[];
+  x: number[];
   yAvg: number[];
   yMin: number[];
   yMax: number[];

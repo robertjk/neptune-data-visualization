@@ -13,7 +13,7 @@ function downsampleData(data: ChartDataFull): ChartDataSampled | undefined {
   }
 
   const result: ChartDataSampled = {
-    xAvg: new Array<number>(DATA_MAX_SIZE),
+    x: new Array<number>(DATA_MAX_SIZE),
     yAvg: new Array<number>(DATA_MAX_SIZE),
     yMin: new Array<number>(DATA_MAX_SIZE),
     yMax: new Array<number>(DATA_MAX_SIZE),
@@ -37,10 +37,10 @@ function downsampleData(data: ChartDataFull): ChartDataSampled | undefined {
       ySum += yData;
     }
 
-    const xAvg = (data.x[startIdx] + data.x[endIdx - 1]) / 2;
+    const x = Math.round((data.x[startIdx] + data.x[endIdx - 1]) / 2);
     const yAvg = ySum / (endIdx - startIdx);
 
-    result.xAvg[sampleIdx] = xAvg;
+    result.x[sampleIdx] = x;
     result.yAvg[sampleIdx] = yAvg;
     result.yMin[sampleIdx] = yMin;
     result.yMax[sampleIdx] = yMax;
