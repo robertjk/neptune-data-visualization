@@ -1,15 +1,6 @@
-import { useMemo } from "react";
+import type { ChartDataFull, DataAggregates } from "~/types";
 
-import type { ChartDataFull } from "../types";
-
-interface DataAggregatesResult {
-  min: number;
-  max: number;
-  average: number;
-  variance: number;
-}
-
-function getDataAggregates(data: ChartDataFull): DataAggregatesResult {
+function getDataAggregates(data: ChartDataFull): DataAggregates {
   const { y: dataY } = data;
 
   let min = Infinity;
@@ -42,8 +33,4 @@ function getDataAggregates(data: ChartDataFull): DataAggregatesResult {
   };
 }
 
-function useDataAggregates(data: ChartDataFull): DataAggregatesResult {
-  return useMemo(() => getDataAggregates(data), [data]);
-}
-
-export { useDataAggregates, type DataAggregatesResult };
+export { getDataAggregates, type DataAggregates };

@@ -1,7 +1,5 @@
-import { useMemo } from "react";
-
+import type { ChartDataFull } from "~/types";
 import type { ChartOptions } from "~/OptionsControls";
-import type { ChartDataFull } from "./types";
 
 function extractDisplayedData(
   data: ChartDataFull,
@@ -21,19 +19,4 @@ function extractDisplayedData(
   };
 }
 
-function useDisplayedData(
-  data: ChartDataFull,
-  options: ChartOptions
-): ChartDataFull {
-  return useMemo(
-    () =>
-      extractDisplayedData(
-        data,
-        options.dataWindowSize,
-        options.dataStartIndex
-      ),
-    [data, options.dataWindowSize, options.dataStartIndex]
-  );
-}
-
-export { useDisplayedData };
+export { extractDisplayedData };

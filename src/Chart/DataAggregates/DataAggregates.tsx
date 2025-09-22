@@ -1,32 +1,25 @@
-import type { ChartDataFull } from "../types";
-
-import {
-  useDataAggregates,
-  type DataAggregatesResult,
-} from "./useDataAggregates";
+import type { DataAggregates as DataAggregatesType } from "~/types";
 
 import "./DataAggregates.css";
 
 const VALUE_PRECISION = 3;
 
 interface DataAggregatesProps {
-  data: ChartDataFull;
+  aggregates: DataAggregatesType;
 }
 
-const dataAggregatesLabels: Record<keyof DataAggregatesResult, string> = {
+const AGGREGATES_LABELS: Record<keyof DataAggregatesType, string> = {
   min: "Min",
   max: "Max",
   average: "Average",
   variance: "Variance",
 };
 
-function DataAggregates({ data }: DataAggregatesProps) {
-  const dataAggregates = useDataAggregates(data);
-
+function DataAggregates({ aggregates }: DataAggregatesProps) {
   const dataAggregatesFormatted = (
-    Object.entries(dataAggregates) as [keyof DataAggregatesResult, number][]
+    Object.entries(aggregates) as [keyof DataAggregatesType, number][]
   ).map(([name, value]) => [
-    dataAggregatesLabels[name],
+    AGGREGATES_LABELS[name],
     value.toFixed(VALUE_PRECISION),
   ]);
 

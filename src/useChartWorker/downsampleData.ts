@@ -1,6 +1,4 @@
-import { useMemo } from "react";
-
-import type { ChartDataFull, ChartDataSampled } from "./types";
+import type { ChartDataFull, ChartDataSampled } from "../types";
 
 // Maximum number of points to display without downsampling. When downsampling, the resulting data
 // will have that size.
@@ -49,8 +47,4 @@ function downsampleData(data: ChartDataFull): ChartDataSampled | undefined {
   return result;
 }
 
-function useSampledData(data: ChartDataFull): ChartDataSampled | undefined {
-  return useMemo(() => downsampleData(data), [data]);
-}
-
-export { useSampledData };
+export { downsampleData };

@@ -1,5 +1,5 @@
-import type { ChartDataFull } from "~/Chart";
 import type { ChartOptions, ChartOptionsDispatch } from "~/OptionsControls";
+import type { ChartDataFull } from "~/types";
 
 import { useAnimation } from "./useAnimation";
 

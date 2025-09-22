@@ -1,18 +1,23 @@
 import { useState } from "react";
 
 import { AnimationControl } from "./AnimationControl";
-import { Chart, type ChartDataFull } from "./Chart";
+import { Chart } from "./Chart";
 import { DataSelector } from "./DataSelector";
 import { OptionsControls, useOptionsReducer } from "./OptionsControls";
+import type { ChartDataFull } from "./types";
 
 import "./App.css";
+import { useChartWorker } from "./useChartWorker";
 
 function App() {
-  const [data, setData] = useState<ChartDataFull | undefined>(undefined);
+  const [inputData, setInputData] = useState<ChartDataFull | undefined>(
+    undefined
+  );
   const [options, dispatchOptions] = useOptionsReducer();
+  const processedData = useChartWorker(inputData, options);
 
   function handleDataLoaded(loadedData: ChartDataFull) {
-    setData(loadedData);
+    setInputData(loadedData);
   }
 
   return (
@@ -26,10 +31,13 @@ function App() {
         <AnimationControl
           options={options}
           dispatchOptions={dispatchOptions}
-          data={data}
+          data={inputData}
         />
-        {data ? (
-          <Chart data={data} options={options} />
+        {processedData ? (
+          <Chart
+            data={processedData.displayedData}
+            aggregates={processedData.dataAggregates}
+          />
         ) : (
           <p className="App-noData">You need to load data first</p>
         )}
