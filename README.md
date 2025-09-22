@@ -50,8 +50,8 @@ The parameters of the plot and animation are adjustable using 4 controls:
 ## Possible improvements
 
 - Improve performance:
-  - [ ] Use Typed Arrays instead of regular Arrays in JS
-  - [ ] Move data processing logic to a Web Worker
+  - [x] Use Typed Arrays instead of regular Arrays in JS
+  - [x] Move data processing logic to a Web Worker
   - [ ] Possibly: Handle data processing as React Transitions
 - Better handling of loading data from file:
   - [ ] Show loader when parsing file
