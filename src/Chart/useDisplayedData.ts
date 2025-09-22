@@ -16,8 +16,8 @@ function extractDisplayedData(
   }
 
   return {
-    x: data.x.slice(dataStartIndex, dataEndIndex),
-    y: data.y.slice(dataStartIndex, dataEndIndex),
+    x: data.x.subarray(dataStartIndex, dataEndIndex),
+    y: data.y.subarray(dataStartIndex, dataEndIndex),
   };
 }
 
