@@ -2,12 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access,
    @typescript-eslint/no-unsafe-assignment */
 
+import type { ParseResult } from "papaparse";
 import { useCSVReader } from "react-papaparse";
 
 import type { ChartDataFull } from "~/Chart";
 
-import { transformResult } from "./transformResult";
-import type { DataParseResult } from "./types";
+import { transformParsedData } from "./transformParsedData";
+import type { ChartDataParsedRow } from "./types";
 
 import "./DataSelector.css";
 
@@ -24,8 +25,8 @@ interface DataSelectorProps {
 function DataSelector({ onDataLoaded }: DataSelectorProps) {
   const { CSVReader } = useCSVReader();
 
-  function handleUploadAccepted(result: DataParseResult) {
-    const chartData = transformResult(result);
+  function handleUploadAccepted(result: ParseResult<ChartDataParsedRow>) {
+    const chartData = transformParsedData(result.data);
     onDataLoaded(chartData);
   }
 

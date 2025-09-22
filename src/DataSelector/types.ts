@@ -1,6 +1,4 @@
-import { type ParseResult } from "papaparse";
+type ChartDataParsedRow = [number, number];
+type ChartDataParsed = ChartDataParsedRow[];
 
-type CSVFileRow = [number, number];
-type DataParseResult = ParseResult<CSVFileRow>;
-
-export { type DataParseResult };
+export { type ChartDataParsed, type ChartDataParsedRow };

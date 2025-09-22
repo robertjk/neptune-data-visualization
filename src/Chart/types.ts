@@ -1,6 +1,6 @@
 interface ChartDataFull {
-  x: number[];
-  y: number[];
+  x: Int32Array;
+  y: Float64Array;
 }
 
 interface ChartDataSampled {
