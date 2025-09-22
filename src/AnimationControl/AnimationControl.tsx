@@ -25,9 +25,9 @@ function AnimationControl({
     dataLength
   );
 
-  const animationEnd =
+  const endOfData =
     options.dataStartIndex + options.dataWindowSize >= dataLength;
-  const buttonDisabled = !isDataLoaded || animationEnd;
+  const buttonDisabled = !isDataLoaded || endOfData;
   const fpsLabel =
     isAnimated && fps ? (
       <small className="AnimationControl-fps">FPS: {String(fps)}</small>

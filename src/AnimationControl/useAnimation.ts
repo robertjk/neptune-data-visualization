@@ -10,10 +10,10 @@ function useAnimation(
   dataLength: number
 ) {
   const [isAnimated, setIsAnimated] = useState(false);
-  const [fps, setFps] = useState<number | undefined>(undefined);
-  const framesCounter = useRef({
+  const animationParams = useRef({
     count: 0,
     currentFrameStart: performance.now(),
+    fps: NaN,
   });
 
   useEffect(
@@ -31,13 +31,13 @@ function useAnimation(
           }
           dispatchOptions({ type: "dataStartIndex", value: newDataStartIndex });
 
-          // Calculate FPS
-          framesCounter.current.count += 1;
+          // Calculate FPS (simplified approach)
+          animationParams.current.count += 1;
           const now = performance.now();
-          if (now - framesCounter.current.currentFrameStart >= ONE_SECOND) {
-            setFps(framesCounter.current.count);
-            framesCounter.current.count = 0;
-            framesCounter.current.currentFrameStart = now;
+          if (now - animationParams.current.currentFrameStart >= ONE_SECOND) {
+            animationParams.current.fps = animationParams.current.count;
+            animationParams.current.count = 0;
+            animationParams.current.currentFrameStart = now;
           }
         }, options.refreshTime);
       }
@@ -66,7 +66,7 @@ function useAnimation(
   return {
     isAnimated,
     toggleAnimation,
-    fps,
+    fps: animationParams.current.fps,
   };
 }
 
