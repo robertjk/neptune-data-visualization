@@ -46,3 +46,14 @@ The parameters of the plot and animation are adjustable using 4 controls:
 - _Refresh time (T)_ - Time interval in ms for updating animation frames (FPS = 1000 / T)
 - _Refresh index shift (P)_ - Amount of data rows which is shifted (moved to the right) each
   animation frame
+
+## Possible improvements
+
+- Improve performance:
+  - [ ] Use Typed Arrays instead of regular Arrays in JS
+  - [ ] Move data processing logic to a Web Worker
+  - [ ] Possibly: Handle data processing as React Transitions
+- Better handling of loading data from file:
+  - [ ] Show loader when parsing file
+  - [ ] Hide the previous chart when loading next file
+  - [ ] Implement custom CSV parser
