@@ -5,13 +5,14 @@ import "uplot/dist/uPlot.min.css";
 
 import type { ChartOptions } from "~/OptionsControls";
 
-import type { ChartDataFull } from "./types";
-import { useDisplayedData } from "./useDisplayedData";
 import { UPLOT_OPTIONS_FULL, UPLOT_OPTIONS_SAMPLED } from "./Chart.config";
 import { DataAggregates } from "./DataAggregates";
+import type { ChartDataFull } from "./types";
+import { useChartWorker } from "./useChartWorker";
+import { useDisplayedData } from "./useDisplayedData";
+import { useSampledData } from "./useSampledData";
 
 import "./Chart.css";
-import { useSampledData } from "./useSampledData";
 
 interface ChartProps {
   data: ChartDataFull;
@@ -21,6 +22,7 @@ interface ChartProps {
 function Chart({ data, options }: ChartProps) {
   const displayedDataFull = useDisplayedData(data, options);
   const displayedDataSampled = useSampledData(displayedDataFull);
+  const chartWorker = useChartWorker();
 
   const isDataDownsampled = displayedDataSampled !== undefined;
 
