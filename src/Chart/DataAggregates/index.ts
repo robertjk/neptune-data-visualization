@@ -1,1 +1,1 @@
-export * from "./DataAggregates";
+export { DataAggregates } from "./DataAggregates";

@@ -1,4 +1,4 @@
-import type { DataAggregates as DataAggregatesType } from "~/types";
+import type { DataAggregates as DataAggregatesType } from "../types";
 
 import "./DataAggregates.css";
 

@@ -1,1 +1,1 @@
-export * from "./useChartWorker";
+export { useChartWorker, type ProcessedData } from "./useChartWorker";

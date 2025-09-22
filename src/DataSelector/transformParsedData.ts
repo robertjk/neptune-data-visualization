@@ -1,4 +1,4 @@
-import type { ChartDataFull } from "~/types";
+import type { ChartDataFull } from "~/Chart";
 
 import type { ChartDataParsed } from "./types";
 

@@ -68,4 +68,4 @@ function OptionsControls({
   );
 }
 
-export { OptionsControls, type ChartOptions, type ChartOptionsDispatch };
+export { OptionsControls };

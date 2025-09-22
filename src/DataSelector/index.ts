@@ -1,1 +1,1 @@
-export * from "./DataSelector";
+export { DataSelector } from "./DataSelector";

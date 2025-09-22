@@ -1,7 +1,5 @@
+import type { ChartDataFull, ChartDataSampled, DataAggregates } from "~/Chart";
 import type { ChartOptions } from "~/OptionsControls";
-import type { ChartDataFull, ChartDataSampled } from "~/types";
-
-import type { DataAggregates } from "./getDataAggregates";
 
 interface WorkerRequestData {
   inputData: ChartDataFull;

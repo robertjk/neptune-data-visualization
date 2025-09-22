@@ -1,4 +1,4 @@
-import type { ChartDataFull } from "~/types";
+import type { ChartDataFull } from "~/Chart";
 import type { ChartOptions } from "~/OptionsControls";
 
 function extractDisplayedData(

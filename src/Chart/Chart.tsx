@@ -2,17 +2,16 @@ import type { AlignedData } from "uplot";
 import UplotReact from "uplot-react";
 import "uplot/dist/uPlot.min.css";
 
-import {
-  type ChartDataFull,
-  type ChartDataSampled,
-  isChartDataSampled,
-  type DataAggregates as DataAggregatesType,
-} from "~/types";
-
 import { UPLOT_OPTIONS_FULL, UPLOT_OPTIONS_SAMPLED } from "./Chart.config";
 import { DataAggregates } from "./DataAggregates";
 
 import "./Chart.css";
+import {
+  isChartDataSampled,
+  type ChartDataFull,
+  type ChartDataSampled,
+  type DataAggregates as DataAggregatesType,
+} from "./types";
 
 interface ChartProps {
   data: ChartDataFull | ChartDataSampled;

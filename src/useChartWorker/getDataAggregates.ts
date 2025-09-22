@@ -1,4 +1,4 @@
-import type { ChartDataFull, DataAggregates } from "~/types";
+import type { ChartDataFull, DataAggregates } from "~/Chart";
 
 function getDataAggregates(data: ChartDataFull): DataAggregates {
   const { y: dataY } = data;

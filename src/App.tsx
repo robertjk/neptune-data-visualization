@@ -1,13 +1,12 @@
 import { useState } from "react";
 
 import { AnimationControl } from "./AnimationControl";
-import { Chart } from "./Chart";
+import { Chart, type ChartDataFull } from "./Chart";
 import { DataSelector } from "./DataSelector";
 import { OptionsControls, useOptionsReducer } from "./OptionsControls";
-import type { ChartDataFull } from "./types";
+import { useChartWorker } from "./useChartWorker";
 
 import "./App.css";
-import { useChartWorker } from "./useChartWorker";
 
 function App() {
   const [inputData, setInputData] = useState<ChartDataFull | undefined>(

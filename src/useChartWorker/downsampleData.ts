@@ -1,6 +1,7 @@
-import type { ChartDataFull, ChartDataSampled } from "../types";
-
 // Maximum number of points to display without downsampling. When downsampling, the resulting data
+
+import type { ChartDataFull, ChartDataSampled } from "~/Chart";
+
 // will have that size.
 const DATA_MAX_SIZE = 1000;
 

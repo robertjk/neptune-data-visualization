@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { ChartOptions } from "~/OptionsControls";
-import type { ChartDataFull } from "~/types";
 
 import type { WorkerResponseData, WorkerRequestData } from "./types";
+import type { ChartDataFull } from "~/Chart";
 
 type ProcessedData = WorkerResponseData;
 

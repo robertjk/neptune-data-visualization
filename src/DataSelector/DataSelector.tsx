@@ -5,11 +5,11 @@
 import type { ParseResult } from "papaparse";
 import { useCSVReader } from "react-papaparse";
 
+import type { ChartDataFull } from "~/Chart";
 import { transformParsedData } from "./transformParsedData";
 import type { ChartDataParsedRow } from "./types";
 
 import "./DataSelector.css";
-import type { ChartDataFull } from "~/types";
 
 const CONFIG = {
   skipEmptyLines: true,
