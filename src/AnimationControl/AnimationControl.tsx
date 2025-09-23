@@ -19,7 +19,7 @@ function AnimationControl({
   const isDataLoaded = Boolean(inputData);
   const dataLength = inputData?.x.length ?? 0;
 
-  const { isAnimated, toggleAnimation, fps } = useAnimation(
+  const { isAnimating, toggleAnimation, fps } = useAnimation(
     options,
     dispatchOptions,
     dataLength
@@ -27,16 +27,18 @@ function AnimationControl({
 
   const endOfData =
     options.dataStartIndex + options.dataWindowSize >= dataLength;
+  const buttonTitle = `${isAnimating ? "Pause" : "Start"} animation`;
   const buttonDisabled = !isDataLoaded || endOfData;
   const fpsLabel =
-    isAnimated && fps ? (
+    isAnimating && fps ? (
       <small className="AnimationControl-fps">FPS: {String(fps)}</small>
     ) : null;
-  const animationToggleLabel = isAnimated ? "Pause" : "Start";
+  const animationToggleLabel = isAnimating ? "Pause" : "Start";
 
   return (
     <button
       type="button"
+      title={buttonTitle}
       className="AnimationControl-button"
       disabled={buttonDisabled}
       onClick={toggleAnimation}

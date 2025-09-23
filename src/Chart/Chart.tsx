@@ -19,20 +19,25 @@ function Chart({ processedData }: ChartProps) {
     return <p className="App-noData">You need to load data first</p>;
   }
 
+  console.log("processedData", processedData);
+
   const { displayedData, dataAggregates } = processedData;
   const isDataSampled = isChartDataSampled(displayedData);
 
-  const uplotData: AlignedData = isDataSampled
-    ? [
-        displayedData.x,
-        displayedData.yAvg,
-        displayedData.yMin,
-        displayedData.yMax,
-      ]
-    : [displayedData.x, displayedData.y];
-  const uplotOptions = isDataSampled
-    ? UPLOT_OPTIONS_SAMPLED
-    : UPLOT_OPTIONS_FULL;
+  let uplotData: AlignedData;
+  let uplotOptions;
+  if (isDataSampled) {
+    uplotData = [
+      displayedData.x,
+      displayedData.yAvg,
+      displayedData.yMin,
+      displayedData.yMax,
+    ];
+    uplotOptions = UPLOT_OPTIONS_SAMPLED;
+  } else {
+    uplotData = [displayedData.x, displayedData.y];
+    uplotOptions = UPLOT_OPTIONS_FULL;
+  }
 
   return (
     <div className="Chart">

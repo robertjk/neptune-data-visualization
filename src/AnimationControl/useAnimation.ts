@@ -9,11 +9,11 @@ function useAnimation(
   dispatchOptions: ChartOptionsDispatch,
   dataLength: number
 ) {
-  const [isAnimated, setIsAnimated] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const animationParams = useRef({
     lastSecondStart: performance.now(),
     lastFrameTime: -Infinity,
-    currentRequestId: 0,
+    currentRequestId: NaN,
     framesCount: 0,
     fps: NaN,
   });
@@ -33,7 +33,7 @@ function useAnimation(
       let newDataStartIndex =
         options.dataStartIndex + options.refreshIndexShift;
       if (newDataStartIndex + options.dataWindowSize > dataLength) {
-        setIsAnimated(false);
+        setIsAnimating(false);
         newDataStartIndex = dataLength - options.dataWindowSize;
       }
       dispatchOptions({ type: "dataStartIndex", value: newDataStartIndex });
@@ -49,7 +49,7 @@ function useAnimation(
       }
     }
 
-    if (isAnimated) {
+    if (isAnimating) {
       animationParams.current.currentRequestId = requestAnimationFrame(animate);
     }
 
@@ -61,7 +61,7 @@ function useAnimation(
       }
     };
   }, [
-    isAnimated,
+    isAnimating,
     dispatchOptions,
     options.dataStartIndex,
     options.dataWindowSize,
@@ -71,11 +71,11 @@ function useAnimation(
   ]);
 
   function toggleAnimation() {
-    setIsAnimated((prevIsAnimated) => !prevIsAnimated);
+    setIsAnimating((prevIsAnimated) => !prevIsAnimated);
   }
 
   return {
-    isAnimated,
+    isAnimating,
     toggleAnimation,
     fps: animationParams.current.fps,
   };
