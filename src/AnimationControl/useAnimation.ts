@@ -11,53 +11,60 @@ function useAnimation(
 ) {
   const [isAnimated, setIsAnimated] = useState(false);
   const animationParams = useRef({
-    count: 0,
-    currentFrameStart: performance.now(),
+    lastSecondStart: performance.now(),
+    lastFrameTime: -Infinity,
+    currentRequestId: 0,
+    framesCount: 0,
     fps: NaN,
   });
 
-  useEffect(
-    function handleAnimation() {
-      let intervalId: NodeJS.Timeout | undefined;
-
-      if (isAnimated) {
-        intervalId = setInterval(() => {
-          // Animate
-          let newDataStartIndex =
-            options.dataStartIndex + options.refreshIndexShift;
-          if (newDataStartIndex + options.dataWindowSize > dataLength) {
-            setIsAnimated(false);
-            newDataStartIndex = dataLength - options.dataWindowSize;
-          }
-          dispatchOptions({ type: "dataStartIndex", value: newDataStartIndex });
-
-          // Calculate FPS (simplified approach)
-          animationParams.current.count += 1;
-          const now = performance.now();
-          if (now - animationParams.current.currentFrameStart >= ONE_SECOND) {
-            animationParams.current.fps = animationParams.current.count;
-            animationParams.current.count = 0;
-            animationParams.current.currentFrameStart = now;
-          }
-        }, options.refreshTime);
+  useEffect(() => {
+    if (isAnimated) {
+      animationParams.current.currentRequestId = requestAnimationFrame(animate);
+    }
+    return () => {
+      if (animationParams.current.currentRequestId) {
+        cancelAnimationFrame(animationParams.current.currentRequestId);
       }
+    };
+  }, [
+    isAnimated,
+    dispatchOptions,
+    options.dataStartIndex,
+    options.dataWindowSize,
+    options.refreshTime,
+    options.refreshIndexShift,
+    dataLength,
+  ]);
 
-      return function clearAnimation() {
-        if (intervalId) {
-          clearInterval(intervalId);
-        }
-      };
-    },
-    [
-      isAnimated,
-      dispatchOptions,
-      options.dataStartIndex,
-      options.dataWindowSize,
-      options.refreshTime,
-      options.refreshIndexShift,
-      dataLength,
-    ]
-  );
+  function animate(now: number) {
+    const timeSinceLastFrame = now - animationParams.current.lastFrameTime;
+    if (timeSinceLastFrame >= options.refreshTime) {
+      animationParams.current.lastFrameTime = now;
+      calculateNewDataPositions();
+      calculateFps();
+    }
+    animationParams.current.currentRequestId = requestAnimationFrame(animate);
+  }
+
+  function calculateNewDataPositions() {
+    let newDataStartIndex = options.dataStartIndex + options.refreshIndexShift;
+    if (newDataStartIndex + options.dataWindowSize > dataLength) {
+      setIsAnimated(false);
+      newDataStartIndex = dataLength - options.dataWindowSize;
+    }
+    dispatchOptions({ type: "dataStartIndex", value: newDataStartIndex });
+  }
+
+  function calculateFps() {
+    animationParams.current.framesCount += 1;
+    const now = performance.now();
+    if (now - animationParams.current.lastSecondStart >= ONE_SECOND) {
+      animationParams.current.fps = animationParams.current.framesCount;
+      animationParams.current.framesCount = 0;
+      animationParams.current.lastSecondStart = now;
+    }
+  }
 
   function toggleAnimation() {
     setIsAnimated((prevIsAnimated) => !prevIsAnimated);
