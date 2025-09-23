@@ -2,7 +2,7 @@ import { useReducer } from "react";
 
 import type { ChartOptions, ChartOptionsAction } from "./types";
 
-const SCHEMA = {
+const OPTIONS_SCHEMA = {
   dataWindowSize: {
     min: 2,
     max: Infinity,
@@ -12,7 +12,7 @@ const SCHEMA = {
     max: Infinity,
   },
   refreshTime: {
-    min: 8,
+    min: 16,
     max: Infinity,
   },
   refreshIndexShift: {
@@ -33,7 +33,7 @@ function optionsReducer(
   action: ChartOptionsAction
 ): ChartOptions {
   const { type, value } = action;
-  const { min, max } = SCHEMA[type];
+  const { min, max } = OPTIONS_SCHEMA[type];
 
   if (value < min) {
     return { ...state, [type]: min };
@@ -48,4 +48,4 @@ function useOptionsReducer() {
   return useReducer(optionsReducer, OPTIONS_INITIAL);
 }
 
-export { useOptionsReducer };
+export { useOptionsReducer, OPTIONS_SCHEMA };

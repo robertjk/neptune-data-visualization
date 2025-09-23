@@ -1,6 +1,7 @@
 import type { ChartOptions, ChartOptionsDispatch } from "./types";
 
 import "./OptionsControls.css";
+import { OPTIONS_SCHEMA } from "./useOptionsReducer";
 
 interface OptionsControlsProps {
   options: ChartOptions;
@@ -25,7 +26,7 @@ function OptionsControls({
         <input
           type="number"
           name="dataWindowSize"
-          min="1"
+          min={OPTIONS_SCHEMA.dataWindowSize.min}
           value={values.dataWindowSize}
           onChange={createChangeHandler("dataWindowSize")}
           className="OptionsControls-input"
@@ -35,7 +36,7 @@ function OptionsControls({
         Data start index (S):
         <input
           type="number"
-          min="0"
+          min={OPTIONS_SCHEMA.dataStartIndex.min}
           name="dataStartIndex"
           value={values.dataStartIndex}
           onChange={createChangeHandler("dataStartIndex")}
@@ -46,7 +47,7 @@ function OptionsControls({
         Refresh time [ms] (T):
         <input
           type="number"
-          min="16"
+          min={OPTIONS_SCHEMA.refreshTime.min}
           name="refreshTime"
           value={values.refreshTime}
           onChange={createChangeHandler("refreshTime")}
@@ -57,7 +58,7 @@ function OptionsControls({
         Refresh index shift (P):
         <input
           type="number"
-          min="1"
+          min={OPTIONS_SCHEMA.refreshIndexShift.min}
           name="refreshSize"
           value={values.refreshIndexShift}
           onChange={createChangeHandler("refreshIndexShift")}
