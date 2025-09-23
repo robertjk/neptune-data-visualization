@@ -49,7 +49,8 @@ The parameters of the plot and animation are adjustable using 4 controls:
 
 ## Possible improvements
 
-- [ ] Show loader when parsing CSV file
+- [ ] Add tests to cover the rest of the application
 - [ ] Hide the previous chart when loading next CSV file
+- [ ] Show loader when parsing CSV file
 - [ ] Implement custom CSV parser
 - [ ] Add control to change data sampling rate
