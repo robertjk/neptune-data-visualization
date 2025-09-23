@@ -17,7 +17,7 @@ test("Initially not animated", () => {
     )
   );
 
-  expect(result.current.isAnimated).toBe(false);
+  expect(result.current.isAnimating).toBe(false);
 });
 
 test("Starts to animate after toggling", () => {
@@ -38,7 +38,7 @@ test("Starts to animate after toggling", () => {
     result.current.toggleAnimation();
   });
 
-  expect(result.current.isAnimated).toBe(true);
+  expect(result.current.isAnimating).toBe(true);
 });
 
 test("Dispatches dataStartIndex updates with proper frequency when animating", () => {
@@ -58,7 +58,7 @@ test("Dispatches dataStartIndex updates with proper frequency when animating", (
     result.current.toggleAnimation();
   });
 
-  expect(result.current.isAnimated).toBe(true);
+  expect(result.current.isAnimating).toBe(true);
   expect(dispatchOptions).not.toBeCalled();
 
   vi.advanceTimersByTime(10);
@@ -104,7 +104,7 @@ test("Stops animating when reaches end of data", () => {
     result.current.toggleAnimation();
   });
 
-  expect(result.current.isAnimated).toBe(true);
+  expect(result.current.isAnimating).toBe(true);
   expect(dispatchOptions).not.toBeCalled();
 
   vi.advanceTimersByTime(10000);
@@ -114,7 +114,7 @@ test("Stops animating when reaches end of data", () => {
   });
 
   expect(options.dataStartIndex).toBe(990);
-  expect(result.current.isAnimated).toBe(false);
+  expect(result.current.isAnimating).toBe(false);
   expect(dispatchOptions).toHaveBeenLastCalledWith({
     type: "dataStartIndex",
     value: 990,
