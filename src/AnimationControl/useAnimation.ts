@@ -18,17 +18,17 @@ function useAnimation(
     fps: NaN,
   });
 
-  useEffect(() => {
-    function animate(now: number) {
-      const timeSinceLastFrame = now - animationParams.current.lastFrameTime;
-      if (timeSinceLastFrame >= options.refreshTime) {
-        animationParams.current.lastFrameTime = now;
-        calculateNewDataPositions();
-        calculateFps();
-      }
-      animationParams.current.currentRequestId = requestAnimationFrame(animate);
-    }
+  useEffect(animate, [
+    isAnimating,
+    dispatchOptions,
+    options.dataStartIndex,
+    options.dataWindowSize,
+    options.refreshTime,
+    options.refreshIndexShift,
+    dataLength,
+  ]);
 
+  function animate() {
     function calculateNewDataPositions() {
       let newDataStartIndex =
         options.dataStartIndex + options.refreshIndexShift;
@@ -50,7 +50,19 @@ function useAnimation(
     }
 
     if (isAnimating) {
-      animationParams.current.currentRequestId = requestAnimationFrame(animate);
+      animationParams.current.currentRequestId = requestAnimationFrame(
+        function animateInner(now: number) {
+          const timeSinceLastFrame =
+            now - animationParams.current.lastFrameTime;
+          if (timeSinceLastFrame >= options.refreshTime) {
+            animationParams.current.lastFrameTime = now;
+            calculateNewDataPositions();
+            calculateFps();
+          }
+          animationParams.current.currentRequestId =
+            requestAnimationFrame(animateInner);
+        }
+      );
     }
 
     return () => {
@@ -60,15 +72,7 @@ function useAnimation(
         cancelAnimationFrame(animationParams.current.currentRequestId);
       }
     };
-  }, [
-    isAnimating,
-    dispatchOptions,
-    options.dataStartIndex,
-    options.dataWindowSize,
-    options.refreshTime,
-    options.refreshIndexShift,
-    dataLength,
-  ]);
+  }
 
   function toggleAnimation() {
     setIsAnimating((prevIsAnimated) => !prevIsAnimated);
