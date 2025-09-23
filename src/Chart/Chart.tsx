@@ -2,28 +2,34 @@ import type { AlignedData } from "uplot";
 import UplotReact from "uplot-react";
 import "uplot/dist/uPlot.min.css";
 
+import type { ProcessedData } from "~/useChartWorker";
+
 import { UPLOT_OPTIONS_FULL, UPLOT_OPTIONS_SAMPLED } from "./Chart.config";
 import { DataAggregates } from "./DataAggregates";
+import { isChartDataSampled } from "./types";
 
 import "./Chart.css";
-import {
-  isChartDataSampled,
-  type ChartDataFull,
-  type ChartDataSampled,
-  type DataAggregates as DataAggregatesType,
-} from "./types";
 
 interface ChartProps {
-  data: ChartDataFull | ChartDataSampled;
-  aggregates: DataAggregatesType;
+  processedData?: ProcessedData;
 }
 
-function Chart({ data, aggregates }: ChartProps) {
-  const isDataSampled = isChartDataSampled(data);
+function Chart({ processedData }: ChartProps) {
+  if (!processedData) {
+    return <p className="App-noData">You need to load data first</p>;
+  }
+
+  const { displayedData, dataAggregates } = processedData;
+  const isDataSampled = isChartDataSampled(displayedData);
 
   const uplotData: AlignedData = isDataSampled
-    ? [data.x, data.yAvg, data.yMin, data.yMax]
-    : [data.x, data.y];
+    ? [
+        displayedData.x,
+        displayedData.yAvg,
+        displayedData.yMin,
+        displayedData.yMax,
+      ]
+    : [displayedData.x, displayedData.y];
   const uplotOptions = isDataSampled
     ? UPLOT_OPTIONS_SAMPLED
     : UPLOT_OPTIONS_FULL;
@@ -31,7 +37,7 @@ function Chart({ data, aggregates }: ChartProps) {
   return (
     <div className="Chart">
       <UplotReact data={uplotData} options={uplotOptions} />
-      <DataAggregates aggregates={aggregates} />
+      <DataAggregates aggregates={dataAggregates} />
     </div>
   );
 }

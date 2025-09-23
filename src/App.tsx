@@ -30,16 +30,9 @@ function App() {
         <AnimationControl
           options={options}
           dispatchOptions={dispatchOptions}
-          data={inputData}
+          inputData={inputData}
         />
-        {processedData ? (
-          <Chart
-            data={processedData.displayedData}
-            aggregates={processedData.dataAggregates}
-          />
-        ) : (
-          <p className="App-noData">You need to load data first</p>
-        )}
+        <Chart processedData={processedData} />
       </main>
     </>
   );

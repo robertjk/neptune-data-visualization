@@ -8,16 +8,16 @@ import type { ChartDataFull } from "~/Chart";
 interface AnimationControlProps {
   options: ChartOptions;
   dispatchOptions: ChartOptionsDispatch;
-  data?: ChartDataFull;
+  inputData?: ChartDataFull;
 }
 
 function AnimationControl({
   options,
   dispatchOptions,
-  data,
+  inputData,
 }: AnimationControlProps) {
-  const dataLength = data ? data.x.length : 0;
-  const isDataLoaded = Boolean(data);
+  const isDataLoaded = Boolean(inputData);
+  const dataLength = inputData?.x.length ?? 0;
 
   const { isAnimated, toggleAnimation, fps } = useAnimation(
     options,
