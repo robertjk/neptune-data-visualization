@@ -49,11 +49,7 @@ The parameters of the plot and animation are adjustable using 4 controls:
 
 ## Possible improvements
 
-- Improve performance:
-  - [x] Use Typed Arrays instead of regular Arrays in JS
-  - [x] Move data processing logic to a Web Worker
-  - [ ] Possibly: Handle data processing as React Transitions
-- Better handling of loading data from file:
-  - [ ] Show loader when parsing file
-  - [ ] Hide the previous chart when loading next file
-  - [ ] Implement custom CSV parser
+- [ ] Show loader when parsing CSV file
+- [ ] Hide the previous chart when loading next CSV file
+- [ ] Implement custom CSV parser
+- [ ] Add control to change data sampling rate
